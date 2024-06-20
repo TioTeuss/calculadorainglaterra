@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Produtos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --background-color-light: #f0f0f0;
+            --text-color-light: #333;
+            --primary-color-light: #00247d;
+            --accent-color-light: #cf142b;
+            --card-background-color-light: #ffffff;
+            --border-color-light: #ddd;
+            --button-background-color-light: #cf142b;
+            --button-hover-color-light: #a00b1f;
+
+            --background-color-dark: #333;
+            --text-color-dark: #f0f0f0;
+            --primary-color-dark: #89cff0;
+            --accent-color-dark: #ff6f61;
+            --card-background-color-dark: #444;
+            --border-color-dark: #555;
+            --button-background-color-dark: #ff6f61;
+            --button-hover-color-dark: #ff3b30;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+            padding: 20px;
+            background-color: var(--card-background-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .product {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px solid var(--primary-color);
+            background-color: var(--card-background-color);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product label {
+            font-weight: bold;
+        }
+
+        .product select, .product button {
+            margin-left: 10px;
+        }
+
+        button {
+            background-color: var(--button-background-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        .cart, .total, .manager, .remainder {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .total span, .manager span, .remainder span {
+            color: var(--accent-color);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: var(--card-background-color);
+        }
+
+        .cart-item button {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .cart-item button:hover {
+            color: var(--button-hover-color);
+        }
+
+        .theme-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .theme-toggle button {
+            background-color: var(--button-background-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .theme-toggle button:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        .checkout {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .invoice {
+            display: none;
+            padding: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            background-color: var(--card-background-color);
+        }
+
+        .invoice h2 {
+            color: var(--primary-color);
+        }
+
+        .input-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-section input {
+            margin: 5px;
+            padding: 10px;
+            width: calc(50% - 22px);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">Alternar Modo</button>
+        </div>
+        <h1>Loja de Produtos</h1>
+        <div id="products">
+            <div class="product">
+                <label>Nome do Produto: Five</label>
+                <div>
+                    <label for="productPrice1">Valor (R$):</label>
+                    <select id="productPrice1">
+                        <option value="30000">30,000 (Parceria)</option>
+                        <option value="35000">35,000 (Sem Parceria)</option>
+                    </select>
+                    <button onclick="addToCart(1)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                </div>
+            </div>
+            <div class="product">
+                <label>Nome do Produto: Evo-9</label>
+                <div>
+                    <label for="productPrice2">Valor (R$):</label>
+                    <select id="productPrice2">
+                        <option value="65000">65,000 (Parceria)</option>
+                        <option value="70000">70,000 (Sem Parceria)</option>
+                    </select>
+                    <button onclick="addToCart(2)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                </div>
+            </div>
+            <div class="product">
+                <label>Nome do Produto: M-Tar</label>
+                <div>
+                    <label for="productPrice3">Valor (R$):</label>
+                    <select id="productPrice3">
+                        <option value="65000">65,000 (Parceria)</option>
+                        <option value="70000">70,000 (Sem Parceria)</option>
+                    </select>
+                    <button onclick="addToCart(3)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                </div>
+            </div>
+            <div class="product">
+                <label>Nome do Produto: Ak-47</label>
+                <div>
+                    <label for="productPrice4">Valor (R$):</label>
+                    <select id="productPrice4">
+                        <option value="105000">105,000 (Parceria)</option>
+                        <option value="115000">115,000 (Sem Parceria)</option>
+                    </select>
+                    <button onclick="addToCart(4)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                </div>
+            </div>
+            <div class="product">
+                <label>Nome do Produto: Ak-47 MK2</label>
+                <div>
+                    <label for="productPrice5">Valor (R$):</label>
+                    <select id="productPrice5">
+                        <option value="115000">115,000 (Parceria)</option>
+                        <option value="125000">125,000 (Sem Parceria)</option>
+                    </select>
+                    <button onclick="addToCart(5)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                </div>
+            </div>
+            <div class="product">
+                <label>Nome do Produto: G3 MK2</label>
+                <div>
+                    <label for="productPrice6">Valor (R$):</label>
+                    <select id="productPrice6">
+                        <option value="115000">115,000 (Parceria)</option>
+                        <option value="125000">125,000 (Sem Parceria)</option>
+                    </select>
+                    <button onclick="addToCart(6)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                </div>
+            </div>
+            <div class="product">
+                <label>Nome do Produto: Parafal</label>
+                <div>
+                    <label for="productPrice7">Valor (R$):</label>
+                    <select id="productPrice7">
+                        <option value="130000">130,000 (Parceria)</option>
+                        <option value="140000">140,000 (Sem Parceria)</option>
+                    </select>
+                    <button onclick="addToCart(7)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart">
+            <h2>Carrinho</h2>
+            <div id="cartContents"></div>
+        </div>
+        <div class="total">Total: R$<span id="total">0.00</span></div>
+        <div class="manager">Lucro do Gerente (25%): R$<span id="managerProfit">0.00</span></div>
+        <div class="remainder">Resto: R$<span id="remainder">0.00</span></div>
+        <div class="checkout">
+            <button onclick="finalizePurchase()"><i class="fas fa-check"></i> Finalizar Compra</button>
+        </div>
+        <div id="invoice" class="invoice">
+            <h2>Nota Fiscal</h2>
+            <div class="input-section">
+                <input type="text" id="sellerName" placeholder="Nome do Vendedor">
+                <input type="text" id="buyerName" placeholder="Nome do Comprador">
+                <button onclick="generateInvoice()"><i class="fas fa-file-invoice"></i> Gerar Nota Fiscal</button>
+            </div>
+            <div id="invoiceDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        let total = 0;
+        const cart = {
+            '30000': { count: 0, price: 30000, label: 'Five (Parceria)' },
+            '35000': { count: 0, price: 35000, label: 'Five (Sem Parceria)' },
+            '65000': { count: 0, price: 65000, label: 'Evo-9 (Parceria)' },
+            '70000': { count: 0, price: 70000, label: 'Evo-9 (Sem Parceria)' },
+            '65001': { count: 0, price: 65000, label: 'M-Tar (Parceria)' },
+            '70001': { count: 0, price: 70000, label: 'M-Tar (Sem Parceria)' },
+            '105000': { count: 0, price: 105000, label: 'Ak-47 (Parceria)' },
+            '115000': { count: 0, price: 115000, label: 'Ak-47 (Sem Parceria)' },
+            '115001': { count: 0, price: 115000, label: 'Ak-47 MK2 (Parceria)' },
+            '125000': { count: 0, price: 125000, label: 'Ak-47 MK2 (Sem Parceria)' },
+            '115002': { count: 0, price: 115000, label: 'G3 MK2 (Parceria)' },
+            '125001': { count: 0, price: 125000, label: 'G3 MK2 (Sem Parceria)' },
+            '130000': { count: 0, price: 130000, label: 'Parafal (Parceria)' },
+            '140000': { count: 0, price: 140000, label: 'Parafal (Sem Parceria)' }
+        };
+
+        const themes = {
+            light: {
+                '--background-color': 'var(--background-color-light)',
+                '--text-color': 'var(--text-color-light)',
+                '--primary-color': 'var(--primary-color-light)',
+                '--accent-color': 'var(--accent-color-light)',
+                '--card-background-color': 'var(--card-background-color-light)',
+                '--border-color': 'var(--border-color-light)',
+                '--button-background-color': 'var(--button-background-color-light)',
+                '--button-hover-color': 'var(--button-hover-color-light)'
+            },
+            dark: {
+                '--background-color': 'var(--background-color-dark)',
+                '--text-color': 'var(--text-color-dark)',
+                '--primary-color': 'var(--primary-color-dark)',
+                '--accent-color': 'var(--accent-color-dark)',
+                '--card-background-color': 'var(--card-background-color-dark)',
+                '--border-color': 'var(--border-color-dark)',
+                '--button-background-color': 'var(--button-background-color-dark)',
+                '--button-hover-color': 'var(--button-hover-color-dark)'
+            }
+        };
+
+        let currentTheme = 'light';
+
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            for (let key in theme) {
+                root.style.setProperty(key, theme[key]);
+            }
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(themes[currentTheme]);
+        }
+
+        function addToCart(productId) {
+            const price = document.getElementById(`productPrice${productId}`).value;
+            cart[price].count++;
+            total += parseFloat(price);
+            updateCart();
+            calculateManagerProfitAndRemainder();
+        }
+
+        function removeFromCart(price) {
+            if (cart[price].count > 0) {
+                cart[price].count--;
+                total -= parseFloat(price);
+                updateCart();
+                calculateManagerProfitAndRemainder();
+            }
+        }
+
+        function updateCart() {
+            const cartContents = document.getElementById('cartContents');
+            cartContents.innerHTML = '';
+            for (const key in cart) {
+                if (cart[key].count > 0) {
+                    const item = document.createElement('div');
+                    item.className = 'cart-item';
+                    item.innerHTML = `
+                        ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}
+                        <button onclick="removeFromCart('${key}')"><i class="fas fa-trash-alt"></i></button>
+                    `;
+                    cartContents.appendChild(item);
+                }
+            }
+            document.getElementById('total').innerText = total.toFixed(2);
+        }
+
+        function calculateManagerProfitAndRemainder() {
+            const managerProfit = total * 0.25;
+            const remainder = total - managerProfit;
+            document.getElementById('managerProfit').innerText = managerProfit.toFixed(2);
+            document.getElementById('remainder').innerText = remainder.toFixed(2);
+        }
+
+        function finalizePurchase() {
+            const invoice = document.getElementById('invoice');
+            invoice.style.display = 'block';
+        }
+
+        function generateInvoice() {
+            const sellerName = document.getElementById('sellerName').value;
+            const buyerName = document.getElementById('buyerName').value;
+            const invoiceDetails = document.getElementById('invoiceDetails');
+            invoiceDetails.innerHTML = '';
+
+            for (const key in cart) {
+                if (cart[key].count > 0) {
+                    const item = document.createElement('div');
+                    item.innerText = `${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}`;
+                    invoiceDetails.appendChild(item);
+                }
+            }
+
+            const totalElement = document.createElement('div');
+            totalElement.innerHTML = `<strong>Total:</strong> R$${total.toFixed(2)}`;
+            invoiceDetails.appendChild(totalElement);
+
+            const managerProfit = total * 0.25;
+            const remainder = total - managerProfit;
+
+            const managerProfitElement = document.createElement('div');
+            managerProfitElement.innerHTML = `<strong>Lucro do Gerente (25%):</strong> R$${managerProfit.toFixed(2)}`;
+            invoiceDetails.appendChild(managerProfitElement);
+
+            const remainderElement = document.createElement('div');
+            remainderElement.innerHTML = `<strong>Resto:</strong> R$${remainder.toFixed(2)}`;
+            invoiceDetails.appendChild(remainderElement);
+
+            const sellerElement = document.createElement('div');
+            sellerElement.innerHTML = `<strong>Vendedor:</strong> ${sellerName}`;
+            invoiceDetails.appendChild(sellerElement);
+
+            const buyerElement = document.createElement('div');
+            buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
+            invoiceDetails.appendChild(buyerElement);
+        }
+
+        // Aplicar o tema inicial
+        applyTheme(themes[currentTheme]);
+    </script>
+</body>
+</html>
