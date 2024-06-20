@@ -1,9 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
+<html>
+<head>
+  <style>
+    /* Style the popup */
+   .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      display: none; /* Hide the popup by default */
+    }
+
+    /* Style the popup content */
+   .popup-content {
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Style the close button */
+    #close-btn {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Add some England-themed styles */
+   .popup {
+      background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/b/be/Flag_of_England.svg/1200px-Flag_of_England.svg.png');
+      background-size: 100% 100%;
+      background-position: center;
+    }
+
+   .popup-content {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <!-- Create a div for the popup -->
+  <div id="popup" class="popup">
+    <!-- Create a div for the popup content -->
+    <div class="popup-content">
+      <h2>Desenvolvido por Tereso, testado por Ighor!</h2>
+      <!-- Add a close button -->
+      <button id="close-btn">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    // Get the popup and close button elements
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Add an event listener to the close button
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // Show the popup when the page loads
+    window.onload = () => {
+      popup.style.display = 'block';
+    };
+  </script>
+</body>
+</html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja de Produtos</title>
+    <title>Controle Venda Inglaterra</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -46,6 +122,8 @@
             background-color: var(--card-background-color);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            height: 90vh;
         }
 
         h1, h2 {
@@ -171,9 +249,9 @@
 <body>
     <div class="container">
         <div class="theme-toggle">
-            <button onclick="toggleTheme()">Alternar Modo</button>
+            <button onclick="toggleTheme()">Alternar Tema</button>
         </div>
-        <h1>Loja de Produtos</h1>
+        <h1>Calculadora Inglaterra</h1>
         <div id="products">
             <div class="product">
                 <label>Nome do Produto: Five</label>
@@ -275,6 +353,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script>
         let total = 0;
         const cart = {
@@ -296,24 +375,24 @@
 
         const themes = {
             light: {
-                '--background-color': 'var(--background-color-light)',
-                '--text-color': 'var(--text-color-light)',
-                '--primary-color': 'var(--primary-color-light)',
-                '--accent-color': 'var(--accent-color-light)',
-                '--card-background-color': 'var(--card-background-color-light)',
-                '--border-color': 'var(--border-color-light)',
-                '--button-background-color': 'var(--button-background-color-light)',
-                '--button-hover-color': 'var(--button-hover-color-light)'
+                '--background-color': '#f0f0f0',
+                '--text-color': '#333',
+                '--primary-color': '#00247d',
+                '--accent-color': '#cf142b',
+                '--card-background-color': '#ffffff',
+                '--border-color': '#ddd',
+                '--button-background-color': '#cf142b',
+                '--button-hover-color': '#a00b1f'
             },
             dark: {
-                '--background-color': 'var(--background-color-dark)',
-                '--text-color': 'var(--text-color-dark)',
-                '--primary-color': 'var(--primary-color-dark)',
-                '--accent-color': 'var(--accent-color-dark)',
-                '--card-background-color': 'var(--card-background-color-dark)',
-                '--border-color': 'var(--border-color-dark)',
-                '--button-background-color': 'var(--button-background-color-dark)',
-                '--button-hover-color': 'var(--button-hover-color-dark)'
+                '--background-color': '#333',
+                '--text-color': '#f0f0f0',
+                '--primary-color': '#89cff0',
+                '--accent-color': '#ff6f61',
+                '--card-background-color': '#444',
+                '--border-color': '#555',
+                '--button-background-color': '#ff6f61',
+                '--button-hover-color': '#ff3b30'
             }
         };
 
@@ -413,9 +492,35 @@
             const buyerElement = document.createElement('div');
             buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
             invoiceDetails.appendChild(buyerElement);
+
+            sendToDiscord(sellerName, buyerName, invoiceDetails.innerHTML);
         }
 
-        // Aplicar o tema inicial
+        function sendToDiscord(sellerName, buyerName, invoiceDetails) {
+            const webhookURL = 'https://discord.com/api/webhooks/1253411867167035563/hGG9irj4ES9KU18-H1RthKvvyhXi3-wtCx0Ol_5i8DkpGpW8MCJh8iuZQSdkZFfZ4M0Z';
+
+            const payload = {
+                content: `**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n**Detalhes da venda:**\n${invoiceDetails.replace(/<\/?[^>]+(>|$)/g, '')}`
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).then(response => {
+                if (response.ok) {
+                    alert('Nota fiscal enviada para o Discord com sucesso!');
+                } else {
+                    alert('Falha ao enviar a nota fiscal para o Discord.');
+                }
+            }).catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao enviar a nota fiscal para o Discord.');
+            });
+        }
+
         applyTheme(themes[currentTheme]);
     </script>
 </body>
