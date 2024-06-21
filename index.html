@@ -545,33 +545,34 @@
             buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
             invoiceDetails.appendChild(buyerElement);
 
-            sendToDiscord(sellerName, buyerName, invoiceDetails.innerHTML);
+            sendToDiscord(sellerName, buyerName, invoiceDetails);
         }
 
-        function sendToDiscord(seller, buyer, details) {
-            const webhookUrl = 'https://discord.com/api/webhooks/1253580712586645534/L_jAd_IXoYim7vBbTfxYV6uj36geyhZSrs2ydZ8EH5XIffjpP1Sf7pVuQzafQMpBDZCd'; // Coloque o URL do webhook do Discord aqui
-            const data = {
-                content: `**Comprovante:**
-**Vendedor:** ${seller}
-**Comprador:** ${buyer}
-**Detalhes:**
-${details.replace(/<[^>]*>?/gm, '')}` // Remove tags HTML
+        function sendToDiscord(sellerName, buyerName, invoiceDetails) {
+            const webhookURL = 'https://discord.com/api/webhooks/1253580712586645534/L_jAd_IXoYim7vBbTfxYV6uj36geyhZSrs2ydZ8EH5XIffjpP1Sf7pVuQzafQMpBDZCd';
+
+            const items = invoiceDetails.querySelectorAll('div');
+            let itemList = '';
+            items.forEach(item => {
+                itemList += `- ${item.innerText}\n`;
+            });
+
+            const payload = {
+                content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧\n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}`
             };
 
-            fetch(webhookUrl, {
+            fetch(webhookURL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(payload)
             }).then(response => {
                 if (response.ok) {
-                    alert('Comprovante enviado para o Discord com sucesso.');
+                    alert('Nota fiscal enviada para o Discord com sucesso!');
                 } else {
-                    alert('Erro ao enviar o comprovante para o Discord.');
+                    alert('Falha ao enviar a nota fiscal para o Discord.');
                 }
-            }).catch(error => {
-                console.error('Erro ao enviar para o Discord:', error);
             });
         }
 
