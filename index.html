@@ -343,11 +343,11 @@
             <button onclick="finalizePurchase()"><i class="fas fa-check"></i> Finalizar Compra</button>
         </div>
         <div id="invoice" class="invoice">
-            <h2>Nota Fiscal</h2>
+            <h2>Comprovante de Venda</h2>
             <div class="input-section">
                 <input type="text" id="sellerName" placeholder="Nome do Vendedor">
                 <input type="text" id="buyerName" placeholder="Nome do Comprador">
-                <button onclick="generateInvoice()"><i class="fas fa-file-invoice"></i> Gerar Nota Fiscal</button>
+                <button onclick="generateInvoice()"><i class="fas fa-file-invoice"></i> Gerar Comprovante</button>
             </div>
             <div id="invoiceDetails"></div>
         </div>
@@ -398,130 +398,134 @@
 
         let currentTheme = 'light';
 
-        function applyTheme(theme) {
-            const root = document.documentElement;
-            for (let key in theme) {
-                root.style.setProperty(key, theme[key]);
-            }
+function applyTheme(theme) {
+    const root = document.documentElement;
+    for (let key in theme) {
+        root.style.setProperty(key, theme[key]);
+    }
+}
+
+function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(themes[currentTheme]);
+}
+
+function addToCart(productId) {
+    const price = document.getElementById(`productPrice${productId}`).value;
+    cart[price].count++;
+    total += parseFloat(price);
+    updateCart();
+    calculateManagerProfitAndRemainder();
+}
+
+function removeFromCart(price) {
+    if (cart[price].count > 0) {
+        cart[price].count--;
+        total -= parseFloat(price);
+        updateCart();
+        calculateManagerProfitAndRemainder();
+    }
+}
+
+function updateCart() {
+    const cartContents = document.getElementById('cartContents');
+    cartContents.innerHTML = '';
+    for (const key in cart) {
+        if (cart[key].count > 0) {
+            const item = document.createElement('div');
+            item.className = 'cart-item';
+            item.innerHTML = `
+                ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}
+                <button onclick="removeFromCart('${key}')"><i class="fas fa-trash-alt"></i></button>
+            `;
+            cartContents.appendChild(item);
         }
+    }
+    document.getElementById('total').innerText = total.toFixed(2);
+}
 
-        function toggleTheme() {
-            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-            applyTheme(themes[currentTheme]);
+function calculateManagerProfitAndRemainder() {
+    const managerProfit = total * 0.25;
+    const remainder = total - managerProfit;
+    document.getElementById('managerProfit').innerText = managerProfit.toFixed(2);
+    document.getElementById('remainder').innerText = remainder.toFixed(2);
+}
+
+function finalizePurchase() {
+    const invoice = document.getElementById('invoice');
+    invoice.style.display = 'block';
+}
+
+function generateInvoice() {
+    const sellerName = document.getElementById('sellerName').value;
+    const buyerName = document.getElementById('buyerName').value;
+    const invoiceDetails = document.getElementById('invoiceDetails');
+    invoiceDetails.innerHTML = '';
+
+    for (const key in cart) {
+        if (cart[key].count > 0) {
+            const item = document.createElement('div');
+            item.innerText = `${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}`;
+            invoiceDetails.appendChild(item);
         }
+    }
 
-        function addToCart(productId) {
-            const price = document.getElementById(`productPrice${productId}`).value;
-            cart[price].count++;
-            total += parseFloat(price);
-            updateCart();
-            calculateManagerProfitAndRemainder();
+    const totalElement = document.createElement('div');
+    totalElement.innerHTML = `<strong>Total:</strong> R$${total.toFixed(2)}`;
+    invoiceDetails.appendChild(totalElement);
+
+    const managerProfit = total * 0.25;
+    const remainder = total - managerProfit;
+
+    const managerProfitElement = document.createElement('div');
+    managerProfitElement.innerHTML = `<strong>Lucro do Gerente (25%):</strong> R$${managerProfit.toFixed(2)}`;
+    invoiceDetails.appendChild(managerProfitElement);
+
+    const remainderElement = document.createElement('div');
+    remainderElement.innerHTML = `<strong>Resto:</strong> R$${remainder.toFixed(2)}`;
+    invoiceDetails.appendChild(remainderElement);
+
+    const sellerElement = document.createElement('div');
+    sellerElement.innerHTML = `<strong>Vendedor:</strong> ${sellerName}`;
+    invoiceDetails.appendChild(sellerElement);
+
+    const buyerElement = document.createElement('div');
+    buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
+    invoiceDetails.appendChild(buyerElement);
+
+    sendToDiscord(sellerName, buyerName, invoiceDetails);
+}
+
+function sendToDiscord(sellerName, buyerName, invoiceDetails) {
+    const webhookURL = 'https://discord.com/api/webhooks/1253411867167035563/hGG9irj4ES9KU18-H1RthKvvyhXi3-wtCx0Ol_5i8DkpGpW8MCJh8iuZQSdkZFfZ4M0Z';
+
+    const items = invoiceDetails.querySelectorAll('div');
+    let itemList = '';
+    items.forEach(item => {
+        itemList += `- ${item.innerText}\n`;
+    });
+
+    const payload = {
+        content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧\n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}`
+    };
+
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(response => {
+        if (response.ok) {
+            alert('Nota fiscal enviada para o Discord com sucesso!');
+        } else {
+            alert('Falha ao enviar a nota fiscal para o Discord.');
         }
+    });
+}
 
-        function removeFromCart(price) {
-            if (cart[price].count > 0) {
-                cart[price].count--;
-                total -= parseFloat(price);
-                updateCart();
-                calculateManagerProfitAndRemainder();
-            }
-        }
-
-        function updateCart() {
-            const cartContents = document.getElementById('cartContents');
-            cartContents.innerHTML = '';
-            for (const key in cart) {
-                if (cart[key].count > 0) {
-                    const item = document.createElement('div');
-                    item.className = 'cart-item';
-                    item.innerHTML = `
-                        ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}
-                        <button onclick="removeFromCart('${key}')"><i class="fas fa-trash-alt"></i></button>
-                    `;
-                    cartContents.appendChild(item);
-                }
-            }
-            document.getElementById('total').innerText = total.toFixed(2);
-        }
-
-        function calculateManagerProfitAndRemainder() {
-            const managerProfit = total * 0.25;
-            const remainder = total - managerProfit;
-            document.getElementById('managerProfit').innerText = managerProfit.toFixed(2);
-            document.getElementById('remainder').innerText = remainder.toFixed(2);
-        }
-
-        function finalizePurchase() {
-            const invoice = document.getElementById('invoice');
-            invoice.style.display = 'block';
-        }
-
-        function generateInvoice() {
-            const sellerName = document.getElementById('sellerName').value;
-            const buyerName = document.getElementById('buyerName').value;
-            const invoiceDetails = document.getElementById('invoiceDetails');
-            invoiceDetails.innerHTML = '';
-
-            for (const key in cart) {
-                if (cart[key].count > 0) {
-                    const item = document.createElement('div');
-                    item.innerText = `${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}`;
-                    invoiceDetails.appendChild(item);
-                }
-            }
-
-            const totalElement = document.createElement('div');
-            totalElement.innerHTML = `<strong>Total:</strong> R$${total.toFixed(2)}`;
-            invoiceDetails.appendChild(totalElement);
-
-            const managerProfit = total * 0.25;
-            const remainder = total - managerProfit;
-
-            const managerProfitElement = document.createElement('div');
-            managerProfitElement.innerHTML = `<strong>Lucro do Gerente (25%):</strong> R$${managerProfit.toFixed(2)}`;
-            invoiceDetails.appendChild(managerProfitElement);
-
-            const remainderElement = document.createElement('div');
-            remainderElement.innerHTML = `<strong>Resto:</strong> R$${remainder.toFixed(2)}`;
-            invoiceDetails.appendChild(remainderElement);
-
-            const sellerElement = document.createElement('div');
-            sellerElement.innerHTML = `<strong>Vendedor:</strong> ${sellerName}`;
-            invoiceDetails.appendChild(sellerElement);
-
-            const buyerElement = document.createElement('div');
-            buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
-            invoiceDetails.appendChild(buyerElement);
-
-            sendToDiscord(sellerName, buyerName, invoiceDetails.innerHTML);
-        }
-
-        function sendToDiscord(sellerName, buyerName, invoiceDetails) {
-            const webhookURL = 'https://discord.com/api/webhooks/1253411867167035563/hGG9irj4ES9KU18-H1RthKvvyhXi3-wtCx0Ol_5i8DkpGpW8MCJh8iuZQSdkZFfZ4M0Z';
-
-            const payload = {
-                content: `**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n**Detalhes da venda:**\n${invoiceDetails.replace(/<\/?[^>]+(>|$)/g, '')}`
-            };
-
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            }).then(response => {
-                if (response.ok) {
-                    alert('Nota fiscal enviada para o Discord com sucesso!');
-                } else {
-                    alert('Falha ao enviar a nota fiscal para o Discord.');
-                }
-            }).catch(error => {
-                console.error('Erro:', error);
-                alert('Erro ao enviar a nota fiscal para o Discord.');
-            });
-        }
-
-        applyTheme(themes[currentTheme]);
-    </script>
+// Inicializa o tema
+applyTheme(themes[currentTheme]);
+</script>
 </body>
 </html>
