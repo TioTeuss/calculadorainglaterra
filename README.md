@@ -1,2 +1,2 @@
-  Feita por: tioteus.
-Para os gerentes da Inglaterra.
+  Feita por: tioteus e ighor
+Para Inglaterra.
