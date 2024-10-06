@@ -1,292 +1,292 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <html>
 <head>
+  <style>
+    /* Style the popup */
+   .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      display: none; /* Hide the popup by default */
+    }
+
+    /* Style the popup content */
+   .popup-content {
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Style the close button */
+    #close-btn {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Add some England-themed styles */
+   .popup {
+      background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/b/be/Flag_of_England.svg/1200px-Flag_of_England.svg.png');
+      background-size: 100% 100%;
+      background-position: center;
+    }
+
+   .popup-content {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <!-- Create a div for the popup -->
+  <div id="popup" class="popup">
+    <!-- Create a div for the popup content -->
+    <div class="popup-content">
+      <h2>Desenvolvido por Teus e Ighor!</h2>
+      <!-- Add a close button -->
+      <button id="close-btn">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    // Get the popup and close button elements
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Add an event listener to the close button
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // Show the popup when the page loads
+    window.onload = () => {
+      popup.style.display = 'block';
+    };
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Inglaterra</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        
-       .popup {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background-color: #fff;
-          border: 1px solid #ddd;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-          display: none; 
+        :root {
+            --background-color-light: #f0f0f0;
+            --text-color-light: #333;
+            --primary-color-light: #00247d;
+            --accent-color-light: #cf142b;
+            --card-background-color-light: #ffffff;
+            --border-color-light: #ddd;
+            --button-background-color-light: #cf142b;
+            --button-hover-color-light: #a00b1f;
+
+            --background-color-dark: #333;
+            --text-color-dark: #f0f0f0;
+            --primary-color-dark: #89cff0;
+            --accent-color-dark: #ff6f61;
+            --card-background-color-dark: #444;
+            --border-color-dark: #555;
+            --button-background-color-dark: #ff6f61;
+            --button-hover-color-dark: #ff3b30;
         }
-    
-        
-       .popup-content {
-          text-align: center;
-          padding: 20px;
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-    
-       
-        #close-btn {
-          background-color: #4CAF50;
-          color: #fff;
-          border: none;
-          padding: 10px 20px;
-          font-size: 16px;
-          cursor: pointer;
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+            padding: 20px;
+            background-color: var(--card-background-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            height: 90vh;
+            display: none;
         }
-    
-       
-       .popup {
-          background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/b/be/Flag_of_England.svg/1200px-Flag_of_England.svg.png');
-          background-size: 100% 100%;
-          background-position: center;
+
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
         }
-    
-       .popup-content {
-          color: blue;
-          text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+        .product {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px solid var(--primary-color);
+            background-color: var(--card-background-color);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-      </style>
-    </head>
-    <body>
-      <!-- Create a div for the popup -->
-      <div id="popup" class="popup">
-        <!-- Create a div for the popup content -->
-        <div class="popup-content">
-          <h2>Desenvolvido por Tereso e Ighor!</h2>
-          <!-- Add a close button -->
-          <button id="close-btn">Fechar</button>
-        </div>
-      </div>
-    
-      <script>
-        // Get the popup and close button elements
-        const popup = document.getElementById('popup');
-        const closeBtn = document.getElementById('close-btn');
-    
-        // Add an event listener to the close button
-        closeBtn.addEventListener('click', () => {
-          popup.style.display = 'none';
-        });
-    
-        // Show the popup when the page loads
-        window.onload = () => {
-          popup.style.display = 'block';
-        };
-      </script>
-      
-      <style>
 
+        .product label {
+            font-weight: bold;
+        }
 
-:root {
-  --background-color-light: #f0f0f0;
-  --text-color-light: #333;
-  --primary-color-light: #00247d;
-  --accent-color-light: #cf142b;
-  --card-background-color-light: #ffffff;
-  --border-color-light: #ddd;
-  --button-background-color-light: #cf142b;
-  --button-hover-color-light: #a00b1f;
+        .product select, .product button {
+            margin-left: 10px;
+        }
 
-  --background-color-dark: #333;
-  --text-color-dark: #f0f0f0;
-  --primary-color-dark: #89cff0;
-  --accent-color-dark: #ff6f61;
-  --card-background-color-dark: #444;
-  --border-color-dark: #555;
-  --button-background-color-dark: #ff6f61;
-  --button-hover-color-dark: #ff3b30;
-}
+        button {
+            background-color: var(--button-background-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+        button:hover {
+            background-color: var(--button-hover-color);
+        }
 
-/* Container Styles */
-.container {
-  max-width: 800px;
-  width: 100%;
-  margin: 20px;
-  padding: 20px;
-  background-color: var(--card-background-color);
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  height: 90vh;
-  display: none;
-}
+        .cart, .total, .manager, .remainder {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
 
-/* Product Styles */
-.product {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 2px solid var(--primary-color);
-  background-color: var(--card-background-color);
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+        .total span, .manager span, .remainder span {
+            color: var(--accent-color);
+        }
 
-.product label {
-  font-weight: bold;
-}
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: var(--card-background-color);
+        }
 
-.product select, .product button {
-  margin-left: 10px;
-}
+        .cart-item button {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
 
-/* Button Styles */
-button {
-  background-color: var(--button-background-color);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+        .cart-item button:hover {
+            color: var(--button-hover-color);
+        }
 
-button:hover {
-  background-color: var(--button-hover-color);
-}
+        .theme-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
 
-/* Cart Styles */
-.cart, .total, .manager, .remainder {
-  margin-top: 20px;
-  font-weight: bold;
-  text-align: center;
-}
+        .theme-toggle button {
+            background-color: var(--button-background-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
 
-.total span, .manager span, .remainder span {
-  color: var(--accent-color);
-}
+        .theme-toggle button:hover {
+            background-color: var(--button-hover-color);
+        }
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-color: var(--card-background-color);
-}
+        .checkout {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-.cart-item button {
-  background-color: transparent;
-  color: var(--accent-color);
-  border: none;
-  cursor: pointer;
-  font-size: 1.2em;
-}
+        .invoice {
+            display: none;
+            padding: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            background-color: var(--card-background-color);
+        }
 
-.cart-item button:hover {
-  color: var(--button-hover-color);
-}
+        .invoice h2 {
+            color: var(--primary-color);
+        }
 
-/* Theme Toggle Styles */
-.theme-toggle {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+        .input-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.theme-toggle button {
-  background-color: var(--button-background-color);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-}
+        .input-section input {
+            margin: 5px;
+            padding: 10px;
+            width: calc(50% - 22px);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
 
-.theme-toggle button:hover {
-  background-color: var(--button-hover-color);
-}
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
 
-/* Login Styles */
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
+        .login-box {
+            padding: 20px;
+            background-color: var(--card-background-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-.login-box {
-  padding: 20px;
-  background-color: var(--card-background-color);
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
+        .login-box input {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 22px);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
 
-.login-box input {
-  padding: 10px;
-  margin: 10px 0;
-  width: calc(100% - 22px);
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-}
+        .login-box button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: var(--button-background-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.login-box button {
-  padding: 10px 20px;
-  margin-top: 10px;
-  background-color: var(--button-background-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.login-box button:hover {
-  background-color: var(--button-hover-color);
-}
-
-/* Invoice Styles */
-.invoice {
-  display: none;
-  padding: 20px;
-  border: 2px solid var(--primary-color);
-  border-radius: 10px;
-  background-color: var(--card-background-color);
-}
-
-.invoice h2 {
-  color: var(--primary-color);
-}
-
-.input-section {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.input-section input {
-  margin: 5px;
-  padding: 10px;
-  width: calc(50% - 22px);
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-}
-
-/* Checkout Styles */
-.checkout {
-  margin-top: 20px;
-  text-align: center;
-}
-
-
+        .login-box button:hover {
+            background-color: var(--button-hover-color);
+        }
     </style>
 </head>
 <body>
@@ -302,85 +302,90 @@ button:hover {
             <button onclick="toggleTheme()">Alternar Tema</button>
         </div>
         <h1>Calculadora Inglaterra</h1>
-        <div id="products">
-            <div class="product">
-                <label>Nome do Produto: Five</label>
-                <div>
-                    <label for="productPrice1">Valor (R$):</label>
-                    <select id="productPrice1">
-                        <option value="30000">30,000 (Parceria)</option>
-                        <option value="35000">35,000 (Sem Parceria)</option>
-                    </select>
-                    <button onclick="addToCart(1)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product">
-                <label>Nome do Produto: Evo-9</label>
-                <div>
-                    <label for="productPrice2">Valor (R$):</label>
-                    <select id="productPrice2">
-                        <option value="65000">65,000 (Parceria)</option>
-                        <option value="70000">70,000 (Sem Parceria)</option>
-                    </select>
-                    <button onclick="addToCart(2)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product">
-                <label>Nome do Produto: M-Tar</label>
-                <div>
-                    <label for="productPrice3">Valor (R$):</label>
-                    <select id="productPrice3">
-                        <option value="65000">65,000 (Parceria)</option>
-                        <option value="70000">70,000 (Sem Parceria)</option>
-                    </select>
-                    <button onclick="addToCart(3)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product">
-                <label>Nome do Produto: Ak-47</label>
-                <div>
-                    <label for="productPrice4">Valor (R$):</label>
-                    <select id="productPrice4">
-                        <option value="105000">105,000 (Parceria)</option>
-                        <option value="115000">115,000 (Sem Parceria)</option>
-                    </select>
-                    <button onclick="addToCart(4)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product">
-                <label>Nome do Produto: Ak-47 MK2</label>
-                <div>
-                    <label for="productPrice5">Valor (R$):</label>
-                    <select id="productPrice5">
-                        <option value="115000">115,000 (Parceria)</option>
-                        <option value="125000">125,000 (Sem Parceria)</option>
-                    </select>
-                    <button onclick="addToCart(5)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product">
-                <label>Nome do Produto: G3 MK2</label>
-                <div>
-                    <label for="productPrice6">Valor (R$):</label>
-                    <select id="productPrice6">
-                        <option value="115000">115,000 (Parceria)</option>
-                        <option value="125000">125,000 (Sem Parceria)</option>
-                    </select>
-                    <button onclick="addToCart(6)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product">
-                <label>Nome do Produto: Parafal</label>
-                <div>
-                    <label for="productPrice7">Valor (R$):</label>
-                    <select id="productPrice7">
-                        <option value="130000">130,000 (Parceria)</option>
-                        <option value="140000">140,000 (Sem Parceria)</option>
-                    </select>
-                    <button onclick="addToCart(7)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
+        <div class="product">
+            <label>Nome do Produto: Five</label>
+            <div>
+                <label for="productPrice1">Valor (R$):</label>
+                <select id="productPrice1">
+                    <option data-price-id="five-parceria" data-price="30000">30,000 (Parceria)</option>
+                    <option data-price-id="five-sem-parceria" data-price="35000">35,000 (Sem Parceria)</option>
+                </select>
+                <button onclick="addToCart(1)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
+        
+        <div class="product">
+            <label>Nome do Produto: Evo-9</label>
+            <div>
+                <label for="productPrice2">Valor (R$):</label>
+                <select id="productPrice2">
+                    <option data-price-id="evo-9-parceria" data-price="65000">65,000 (Parceria)</option>
+                    <option data-price-id="evo-9-sem-parceria" data-price="70000">70,000 (Sem Parceria)</option>
+                </select>
+                <button onclick="addToCart(2)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+            </div>
+        </div>
+        
+        <div class="product">
+            <label>Nome do Produto: M-Tar</label>
+            <div>
+                <label for="productPrice3">Valor (R$):</label>
+                <select id="productPrice3">
+                    <option data-price-id="m-tar-parceria" data-price="65001">65,000 (Parceria)</option>
+                    <option data-price-id="m-tar-sem-parceria" data-price="70001">70,000 (Sem Parceria)</option>
+                </select>
+                <button onclick="addToCart(3)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+            </div>
+        </div>
+        
+        <div class="product">
+            <label>Nome do Produto: Ak-47</label>
+            <div>
+                <label for="productPrice4">Valor (R$):</label>
+                <select id="productPrice4">
+                    <option data-price-id="ak-47-parceria" data-price="105000">105,000 (Parceria)</option>
+                    <option data-price-id="ak-47-sem-parceria" data-price="115000">115,000 (Sem Parceria)</option>
+                </select>
+                <button onclick="addToCart(4)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+            </div>
+        </div>
+        
+        <div class="product">
+            <label>Nome do Produto: Ak-47 MK2</label>
+            <div>
+                <label for="productPrice5">Valor (R$):</label>
+                <select id="productPrice5">
+                    <option data-price-id="ak-47-mk2-parceria" data-price="115001">115,000 (Parceria)</option>
+                    <option data-price-id="ak-47-mk2-sem-parceria" data-price="125000">125,000 (Sem Parceria)</option>
+                </select>
+                <button onclick="addToCart(5)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+            </div>
+        </div>
+        
+        <div class="product">
+            <label>Nome do Produto: G3 MK2</label>
+            <div>
+                <label for="productPrice6">Valor (R$):</label>
+                <select id="productPrice6">
+                    <option data-price-id="g3-mk2-parceria" data-price="115002">115,000 (Parceria)</option>
+                    <option data-price-id="g3-mk2-sem-parceria" data-price="125001">125,000 (Sem Parceria)</option>
+                </select>
+                <button onclick="addToCart(6)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <label>Nome do Produto: Parafal</label>
+            <div>
+                <label for="productPrice7">Valor (R$):</label>
+                <select id="productPrice7">
+                    <option data-price-id="parafal-parceria" data-price="130000">130,000 (Parceria)</option>
+                    <option data-price-id="parafal-sem-parceria" data-price="140000">140,000 (Sem Parceria)</option>
+                </select>
+                <button onclick="addToCart(7)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+            </div>
+        </div>
+        
 
         <div class="cart">
             <h2>Carrinho</h2>
@@ -408,21 +413,21 @@ button:hover {
         const PASSWORD = 'tereso';
         let total = 0;
         const cart = {
-            '30000': { count: 0, price: 30000, label: 'Five (Parceria)' },
-            '35000': { count: 0, price: 35000, label: 'Five (Sem Parceria)' },
-            '65000': { count: 0, price: 65000, label: 'Evo-9 (Parceria)' },
-            '70000': { count: 0, price: 70000, label: 'Evo-9 (Sem Parceria)' },
-            '65001': { count: 0, price: 65000, label: 'M-Tar (Parceria)' },
-            '70001': { count: 0, price: 70000, label: 'M-Tar (Sem Parceria)' },
-            '105000': { count: 0, price: 105000, label: 'Ak-47 (Parceria)' },
-            '115000': { count: 0, price: 115000, label: 'Ak-47 (Sem Parceria)' },
-            '115001': { count: 0, price: 115000, label: 'Ak-47 MK2 (Parceria)' },
-            '125000': { count: 0, price: 125000, label: 'Ak-47 MK2 (Sem Parceria)' },
-            '115002': { count: 0, price: 115000, label: 'G3 MK2 (Parceria)' },
-            '125001': { count: 0, price: 125000, label: 'G3 MK2 (Sem Parceria)' },
-            '130000': { count: 0, price: 130000, label: 'Parafal (Parceria)' },
-            '140000': { count: 0, price: 140000, label: 'Parafal (Sem Parceria)' }
-        };
+    'five-parceria': { count: 0, price: 30000, label: 'Five (Parceria)' },
+    'five-sem-parceria': { count: 0, price: 35000, label: 'Five (Sem Parceria)' },
+    'evo-9-parceria': { count: 0, price: 65000, label: 'Evo-9 (Parceria)' },
+    'evo-9-sem-parceria': { count: 0, price: 70000, label: 'Evo-9 (Sem Parceria)' },
+    'm-tar-parceria': { count: 0, price: 65000, label: 'M-Tar (Parceria)' },
+    'm-tar-sem-parceria': { count: 0, price: 70000, label: 'M-Tar (Sem Parceria)' },
+    'ak-47-parceria': { count: 0, price: 105000, label: 'Ak-47 (Parceria)' },
+    'ak-47-sem-parceria': { count: 0, price: 115000, label: 'Ak-47 (Sem Parceria)' },
+    'ak-47-mk2-parceria': { count: 0, price: 115000, label: 'Ak-47 MK2 (Parceria)' },
+    'ak-47-mk2-sem-parceria': { count: 0, price: 125000, label: 'Ak-47 MK2 (Sem Parceria)' },
+    'g3-mk2-parceria': { count: 0, price: 115000, label: 'G3 MK2 (Parceria)' },
+    'g3-mk2-sem-parceria': { count: 0, price: 125000, label: 'G3 MK2 (Sem Parceria)' },
+    'parafal-parceria': { count: 0, price: 130000, label: 'Parafal (Parceria)' },
+    'parafal-sem-parceria': { count: 0, price: 140000, label: 'Parafal (Sem Parceria)' }
+};
 
         const themes = {
             light: {
@@ -460,22 +465,45 @@ button:hover {
             currentTheme = currentTheme === 'light' ? 'dark' : 'light';
             applyTheme(themes[currentTheme]);
         }
-function updateCart() {
-            const cartContents = document.getElementById('cartContents');
-            cartContents.innerHTML = '';
-            for (const key in cart) {
-                if (cart[key].count > 0) {
-                    const item = document.createElement('div');
-                    item.className = 'cart-item';
-                    item.innerHTML = `
-                        ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}
-                        <button onclick="removeFromCart('${key}')"><i class="fas fa-trash-alt"></i></button>
-                    `;
-                    cartContents.appendChild(item);
-                }
-            }
-            document.getElementById('total').innerText = total.toFixed(2);
+
+        function addToCart(productId) {
+    const priceElement = document.getElementById(`productPrice${productId}`);
+    const selectedOption = priceElement.options[priceElement.selectedIndex];
+    const priceId = selectedOption.getAttribute('data-price-id');
+    cart[priceId].count++;
+    total += parseFloat(cart[priceId].price);
+    updateCart();
+    calculateManagerProfitAndRemainder();
+}
+
+function removeFromCart(priceId) {
+    if (cart[priceId].count > 0) {
+        cart[priceId].count--;
+        total -= parseFloat(cart[priceId].price);
+        if (cart[priceId].count === 0) {
+            total = Math.max(total, 0);
         }
+        updateCart();
+        calculateManagerProfitAndRemainder();
+    }
+}
+
+function updateCart() {
+    const cartContents = document.getElementById('cartContents');
+    cartContents.innerHTML = '';
+    for (const key in cart) {
+        if (cart[key].count > 0) {
+            const item = document.createElement('div');
+            item.className = 'cart-item';
+            item.innerHTML = `
+                ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}
+                <button onclick="removeFromCart('${key}')"><i class="fas fa-trash-alt"></i></button>
+            `;
+            cartContents.appendChild(item);
+        }
+    }
+    document.getElementById('total').innerText = total.toFixed(2);
+}
 
         function calculateManagerProfitAndRemainder() {
             const managerProfit = total * 0.25;
@@ -539,7 +567,7 @@ function updateCart() {
             });
 
             const payload = {
-                content: `𓃸 **Nota Fiscal - Loja de Produtos** 𓃸\n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}`
+                content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧\n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}`
             };
 
             fetch(webhookURL, {
@@ -556,25 +584,6 @@ function updateCart() {
                 }
             });
         }
-        function addToCart(productId) {
-            const priceElement = document.getElementById(`productPrice${productId}`);
-            const price = priceElement.value;
-            cart[price].count++;
-            total += parseFloat(price);
-            updateCart();
-            calculateManagerProfitAndRemainder();
-        }
-
-        function removeFromCart(price) {
-            if (cart[price].count > 0) {
-                cart[price].count--;
-                total -= parseFloat(price);
-                updateCart();
-                calculateManagerProfitAndRemainder();
-            }
-        }
-
-        
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
