@@ -627,27 +627,12 @@ function updateCart() {
             }
 
             const totalElement = document.createElement('div');
-            totalElement.innerHTML = `<strong>Total:</strong> R$${total.toFixed(2)}`;
+            totalElement.innerHTML = `<br><br><big><strong> **    Total:</strong></big> R$${total.toFixed(2)}**`;
             invoiceDetails.appendChild(totalElement);
 
-            const managerProfit = total * 0.25;
-            const remainder = total - managerProfit;
+            
 
-            const managerProfitElement = document.createElement('div');
-            managerProfitElement.innerHTML = `<strong>Lucro do Gerente (25%):</strong> R$${managerProfit.toFixed(2)}`;
-            invoiceDetails.appendChild(managerProfitElement);
-
-            const remainderElement = document.createElement('div');
-            remainderElement.innerHTML = `<strong>Resto:</strong> R$${remainder.toFixed(2)}`;
-            invoiceDetails.appendChild(remainderElement);
-
-            const sellerElement = document.createElement('div');
-            sellerElement.innerHTML = `<strong>Vendedor:</strong> ${sellerName}`;
-            invoiceDetails.appendChild(sellerElement);
-
-            const buyerElement = document.createElement('div');
-            buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
-            invoiceDetails.appendChild(buyerElement);
+            
 
             sendToDiscord(sellerName, buyerName, invoiceDetails);
         }
@@ -661,8 +646,15 @@ function updateCart() {
                 itemList += `- ${item.innerText}\n`;
             });
 
+            const date = new Date();
+            const offset = -3; 
+            const utcDate = new Date(date.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+            const formattedDate = utcDate.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
             const payload = {
-                content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧\n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}`
+                content: `--------------------------------------------------\n\n🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧 \n\n**Data e Hora (GMT-3):** ${formattedDate}` + 
+                
+               ` \n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}\n\n--------------------------------------------------`
             };
 
             fetch(webhookURL, {
