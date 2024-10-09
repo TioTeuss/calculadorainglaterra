@@ -626,6 +626,14 @@ function updateCart() {
                 }
             }
 
+            const sellerElement = document.createElement('div');
+            sellerElement.innerHTML = `<strong>Vendedor:</strong> ${sellerName}`;
+            invoiceDetails.appendChild(sellerElement);
+
+            const buyerElement = document.createElement('div');
+            buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
+            invoiceDetails.appendChild(buyerElement);
+
             const totalElement = document.createElement('div');
             totalElement.innerHTML = `<br><br><big><strong> **    Total:</strong></big> R$${total.toFixed(2)}**`;
             invoiceDetails.appendChild(totalElement);
