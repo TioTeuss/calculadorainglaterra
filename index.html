@@ -660,9 +660,9 @@ function updateCart() {
             const formattedDate = utcDate.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
             const payload = {
-                content: `--------------------------------------------------\n\n🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧 \n\n**Data e Hora (GMT-3):** ${formattedDate}` + 
+                content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧 \n\n**Data e Hora (GMT-3):** ${formattedDate}` + 
                 
-               ` \n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}\n\n--------------------------------------------------`
+               ` \n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}`
             };
 
             fetch(webhookURL, {
