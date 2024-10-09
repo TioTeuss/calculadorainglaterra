@@ -612,73 +612,68 @@ function updateCart() {
             invoice.style.display = 'block';
         }
 
-        function generateInvoice() {
-            const sellerName = document.getElementById('sellerName').value;
-            const buyerName = document.getElementById('buyerName').value;
-            const invoiceDetails = document.getElementById('invoiceDetails');
-            invoiceDetails.innerHTML = '';
+        let itemList = '';
 
-            for (const key in cart) {
-                if (cart[key].count > 0) {
-                    const item = document.createElement('div');
-                    item.innerText = `${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}`;
-                    invoiceDetails.appendChild(item);
-                }
-            }
+function generateInvoice() {
+    const sellerName = document.getElementById('sellerName').value;
+    const buyerName = document.getElementById('buyerName').value;
+    const invoiceDetails = document.getElementById('invoiceDetails');
+    invoiceDetails.innerHTML = '';
 
-            const sellerElement = document.createElement('div');
-            sellerElement.innerHTML = `<strong>Vendedor:</strong> ${sellerName}`;
-            invoiceDetails.appendChild(sellerElement);
-
-            const buyerElement = document.createElement('div');
-            buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
-            invoiceDetails.appendChild(buyerElement);
-
-            const totalElement = document.createElement('div');
-            totalElement.innerHTML = `<br><br><big><strong> **    Total:</strong></big> R$${total.toFixed(2)}**`;
-            invoiceDetails.appendChild(totalElement);
-
-            
-
-            
-
-            sendToDiscord(sellerName, buyerName, invoiceDetails);
+    itemList = '';
+    for (const key in cart) {
+        if (cart[key].count > 0) {
+            itemList += `- ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}\n`;
         }
+    }
 
-        function sendToDiscord(sellerName, buyerName, invoiceDetails) {
-            const webhookURL = 'https://discord.com/api/webhooks/1253580712586645534/L_jAd_IXoYim7vBbTfxYV6uj36geyhZSrs2ydZ8EH5XIffjpP1Sf7pVuQzafQMpBDZCd';
+    const sellerElement = document.createElement('div');
+    sellerElement.innerHTML = `<strong>Vendedor:</strong> ${sellerName}`;
+    invoiceDetails.appendChild(sellerElement);
 
-            const items = invoiceDetails.querySelectorAll('div');
-            let itemList = '';
-            items.forEach(item => {
-                itemList += `- ${item.innerText}\n`;
-            });
+    const buyerElement = document.createElement('div');
+    buyerElement.innerHTML = `<strong>Comprador:</strong> ${buyerName}`;
+    invoiceDetails.appendChild(buyerElement);
 
-            const date = new Date();
-            const offset = -3; 
-            const utcDate = new Date(date.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
-            const formattedDate = utcDate.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    const itemsElement = document.createElement('div');
+itemsElement.innerHTML = `<strong>Detalhes da Nota Fiscal:</strong><br>${itemList.replace(/\n/g, '<br>')}`;
+invoiceDetails.appendChild(itemsElement);
 
-            const payload = {
-                content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧 \n\n**Data e Hora (GMT-3):** ${formattedDate}` + 
+    const totalElement = document.createElement('div');
+    totalElement.innerHTML = `<br><br><big><strong> **    Total:</strong></big> R$${total.toFixed(2)}**`;
+    invoiceDetails.appendChild(totalElement);
+
+    sendToDiscord(sellerName, buyerName, invoiceDetails);
+}
+
+function sendToDiscord(sellerName, buyerName, invoiceDetails) {
+    const webhookURL = 'https://discord.com/api/webhooks/1253580712586645534/L_jAd_IXoYim7vBbTfxYV6uj36geyhZSrs2ydZ8EH5XIffjpP1Sf7pVuQzafQMpBDZCd';
+
+    const date = new Date();
+    const offset = -3; 
+    const utcDate = new Date(date.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+    const formattedDate = utcDate.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+    const payload = {
+        content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧 \n\n**Data e Hora (GMT-3):** ${formattedDate}` + 
                 
-               ` \n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}`
-            };
+               ` \n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}\n\n**Total:** R$${total.toFixed(2)}`
+    };
 
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            }).then(response => {
-                if (response.ok) {
-                    alert('Nota fiscal enviada para o Discord com sucesso!');
-                } else {
-                    alert('Falha ao enviar a nota fiscal para o Discord.');
-                }
-            });
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(response => {
+        if (response.ok) {
+            alert('Nota fiscal enviada para o Discord com sucesso!');
+        } else {
+            alert('Falha ao enviar a nota fiscal para o Discord.');
         }
+    });
+}
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
