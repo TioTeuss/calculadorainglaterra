@@ -607,6 +607,11 @@ function calculateManagerProfitAndRemainder() {
     document.getElementById('remainder').innerText = `R$${remainder.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
+function finalizePurchase() {
+            const invoice = document.getElementById('invoice');
+            invoice.style.display = 'block';
+        }
+        
 function generateInvoice() {
     const sellerName = document.getElementById('sellerName').value;
     const buyerName = document.getElementById('buyerName').value;
@@ -659,12 +664,16 @@ function sendToDiscord(sellerName, buyerName, invoiceDetails) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
-    }).then(response => {
+    })
+    .then(response => {
         if (response.ok) {
-            alert('Nota fiscal enviada para o Discord com sucesso !');
+            console.log('Nota fiscal enviada para o Discord com sucesso!');
         } else {
-            alert('Erro ao enviar nota fiscal para o Discord!');
+            console.error('Erro ao enviar nota fiscal para o Discord:', response.status, response.statusText);
         }
+    })
+    .catch(error => {
+        console.error('Erro ao enviar nota fiscal para o Discord:', error);
     });
 }
 
