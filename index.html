@@ -591,28 +591,21 @@ function updateCart() {
             const item = document.createElement('div');
             item.className = 'cart-item';
             item.innerHTML = `
-                ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}
+                ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 <button onclick="removeFromCart('${key}')"><i class="fas fa-trash-alt"></i></button>
             `;
             cartContents.appendChild(item);
         }
     }
-    document.getElementById('total').innerText = total.toFixed(2);
+    document.getElementById('total').innerText = `R$${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-        function calculateManagerProfitAndRemainder() {
-            const managerProfit = total * 0.25;
-            const remainder = total - managerProfit;
-            document.getElementById('managerProfit').innerText = managerProfit.toFixed(2);
-            document.getElementById('remainder').innerText = remainder.toFixed(2);
-        }
-
-        function finalizePurchase() {
-            const invoice = document.getElementById('invoice');
-            invoice.style.display = 'block';
-        }
-
-        let itemList = '';
+function calculateManagerProfitAndRemainder() {
+    const managerProfit = total * 0.25;
+    const remainder = total - managerProfit;
+    document.getElementById('managerProfit').innerText = `R$${managerProfit.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    document.getElementById('remainder').innerText = `R$${remainder.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
 
 function generateInvoice() {
     const sellerName = document.getElementById('sellerName').value;
@@ -623,7 +616,7 @@ function generateInvoice() {
     itemList = '';
     for (const key in cart) {
         if (cart[key].count > 0) {
-            itemList += `- ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR')}\n`;
+            itemList += `- ${cart[key].label}: ${cart[key].count} x R$${cart[key].price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n`;
         }
     }
 
@@ -636,11 +629,11 @@ function generateInvoice() {
     invoiceDetails.appendChild(buyerElement);
 
     const itemsElement = document.createElement('div');
-itemsElement.innerHTML = `<strong>Detalhes da Nota Fiscal:</strong><br>${itemList.replace(/\n/g, '<br>')}`;
-invoiceDetails.appendChild(itemsElement);
+    itemsElement.innerHTML = `<strong>Detalhes da Nota Fiscal:</strong><br>${itemList.replace(/\n/g, '<br>')}`;
+    invoiceDetails.appendChild(itemsElement);
 
     const totalElement = document.createElement('div');
-    totalElement.innerHTML = `<br><br><big><strong> **    Total:</strong></big> R$${total.toFixed(2)}**`;
+    totalElement.innerHTML = `<br><br><big><strong> **    Total:</strong></big> R$${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}**`;
     invoiceDetails.appendChild(totalElement);
 
     sendToDiscord(sellerName, buyerName, invoiceDetails);
@@ -657,7 +650,7 @@ function sendToDiscord(sellerName, buyerName, invoiceDetails) {
     const payload = {
         content: `🇬🇧 **Nota Fiscal - Loja de Produtos** 🇬🇧 \n\n**Data e Hora (GMT-3):** ${formattedDate}` + 
                 
-               ` \n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}\n\n**Total:** R$${total.toFixed(2)}`
+               ` \n\n**Vendedor:** ${sellerName}\n**Comprador:** ${buyerName}\n\n**Detalhes da Nota Fiscal:**\n${itemList}\n\n**Total:** R$${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     };
 
     fetch(webhookURL, {
@@ -668,9 +661,9 @@ function sendToDiscord(sellerName, buyerName, invoiceDetails) {
         body: JSON.stringify(payload)
     }).then(response => {
         if (response.ok) {
-            alert('Nota fiscal enviada para o Discord com sucesso!');
+            alert('Nota fiscal enviada para o Discord com sucesso !');
         } else {
-            alert('Falha ao enviar a nota fiscal para o Discord.');
+            alert('Erro ao enviar nota fiscal para o Discord!');
         }
     });
 }
