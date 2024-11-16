@@ -349,10 +349,10 @@
                     <option data-price-id="five-parceria" data-price="30000">30,000 (Parceria)</option>
                     <option data-price-id="five-sem-parceria" data-price="35000">35,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity1" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(1)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
-        
         <div class="product">
             <label>Nome do Produto: Evo-9</label>
             <div>
@@ -361,6 +361,7 @@
                     <option data-price-id="evo-9-parceria" data-price="65000">65,000 (Parceria)</option>
                     <option data-price-id="evo-9-sem-parceria" data-price="70000">70,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity2" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(2)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -373,6 +374,7 @@
                     <option data-price-id="m-tar-parceria" data-price="65001">65,000 (Parceria)</option>
                     <option data-price-id="m-tar-sem-parceria" data-price="70001">70,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity3" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(3)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -385,6 +387,7 @@
                     <option data-price-id="ak-47-parceria" data-price="105000">105,000 (Parceria)</option>
                     <option data-price-id="ak-47-sem-parceria" data-price="115000">115,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity4" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(4)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -397,6 +400,7 @@
                     <option data-price-id="ak-47-mk2-parceria" data-price="115001">115,000 (Parceria)</option>
                     <option data-price-id="ak-47-mk2-sem-parceria" data-price="125000">125,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity5" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(5)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -409,6 +413,7 @@
                     <option data-price-id="g3-mk2-parceria" data-price="115002">115,000 (Parceria)</option>
                     <option data-price-id="g3-mk2-sem-parceria" data-price="125001">125,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity6" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(6)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -421,6 +426,7 @@
                     <option data-price-id="parafal-parceria" data-price="130000">130,000 (Parceria)</option>
                     <option data-price-id="parafal-sem-parceria" data-price="140000">140,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity7" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(7)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -433,6 +439,7 @@
                     <option data-price-id="ar-bege-parceria" data-price="115000">115,000 (Parceria)</option>
                     <option data-price-id="ar-bege-sem-parceria" data-price="125000">125,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity8" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(8)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -445,6 +452,7 @@
                     <option data-price-id="g3-luneta-parceria" data-price="115000">115,000 (Parceria)</option>
                     <option data-price-id="g3-luneta-sem-parceria" data-price="125000">125,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity9" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(9)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -457,18 +465,20 @@
                     <option data-price-id="ak-shot-parceria" data-price="130000">130,000 (Parceria)</option>
                     <option data-price-id="ak-shot-sem-parceria" data-price="140000">140,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity10" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(10)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
     
         <div class="product">
-            <label>Nome do Produto: AR15 Longa</label>
+            <label>Nome do Produto: AR15</label>
             <div>
                 <label for="productPrice11">Valor (R$):</label>
                 <select id="productPrice11">
                     <option data-price-id="ar15-longa-parceria" data-price="190000">190,000 (Parceria)</option>
                     <option data-price-id="ar15-longa-sem-parceria" data-price="200000">200,000 (Sem Parceria)</option>
                 </select>
+                <input type="number" id="quantity11" value="1" min="1" style="width: 50px;">
                 <button onclick="addToCart(11)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -565,8 +575,14 @@
     const priceElement = document.getElementById(`productPrice${productId}`);
     const selectedOption = priceElement.options[priceElement.selectedIndex];
     const priceId = selectedOption.getAttribute('data-price-id');
-    cart[priceId].count++;
-    total += parseFloat(cart[priceId].price);
+    
+   
+    const quantityInput = document.getElementById(`quantity${productId}`);
+    const quantity = parseInt(quantityInput.value) || 1; 
+
+   
+    cart[priceId].count += quantity; 
+    total += cart[priceId].price * quantity;
     updateCart();
     calculateManagerProfitAndRemainder();
 }
