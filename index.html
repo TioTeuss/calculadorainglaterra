@@ -111,7 +111,7 @@
             --button-background-color-light: #cf142b;
             --button-hover-color-light: #a00b1f;
 
-            --background-color-dark: #333;
+            --background-color-dark: #070303;
             --text-color-dark: #f0f0f0;
             --primary-color-dark: #89cff0;
             --accent-color-dark: #ff6f61;
@@ -163,12 +163,14 @@
         }
 
         .product label {
-            font-weight: bold;
-        }
+    font-weight: bold;
+    flex: 1; /* Allow label to take available space */
+}
 
-        .product select, .product button {
-            margin-left: 10px;
-        }
+.product select, .product button {
+    margin-left: 10px;
+    min-width: 120px; /* Set a minimum width for consistency */
+}
 
         button {
             background-color: var(--button-background-color);
@@ -483,6 +485,18 @@
             </div>
         </div>
     
+        <div class="product">
+            <label>Nome do Produto: Glock Rajada</label>
+            <div>
+                <label for="productPrice12">Valor (R$):</label>
+                <select id="productPrice12">
+                    <option data-price-id="glock-rajada-parceria" data-price="65000">65,000 (Parceria)</option>
+                    <option data-price-id="glock-rajada-sem-parceria" data-price="70000">70,000 (Sem Parceria)</option>
+                </select>
+                <input type="number" id="quantity12" value="1" min="1" style="width: 50px;">
+                <button onclick="addToCart(12)"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
+            </div>
+        </div>
 
         <div class="cart">
             <h2>Carrinho</h2>
@@ -532,6 +546,8 @@
     'ak-shot-sem-parceria': { count: 0, price: 140000, label: 'Ak Shot (Sem Parceria)' },
     'ar15-longa-parceria': { count: 0, price: 190000, label: 'Ar 15 (Parceria)' },
     'ar15-longa-sem-parceria': { count: 0, price: 200000, label: 'Ar 15 (Sem Parceria)' },
+    'glock-rajada-parceria': { count: 0, price: 65000, label: 'Glock Rajada (Parceria)' },
+    'glock-rajada-sem-parceria': { count: 0, price: 70000, label: 'Glock Rajada (Sem Parceria)' },
 };
 
         const themes = {
